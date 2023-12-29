@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\TagsController;
+use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\Admin\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'App\Http\Controllers\HomeController@index');
+
+Route::get('/admin', [DashboardController::class, 'index']);
+Route::resource('admin/categories', CategoriesController::class);
+Route::resource('admin/tags', TagsController::class);
+Route::resource('admin/users', UsersController::class);
+Route::resource('admin/posts', PostsController::class);
