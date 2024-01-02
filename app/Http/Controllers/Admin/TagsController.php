@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Tag;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TagsController extends Controller
 {

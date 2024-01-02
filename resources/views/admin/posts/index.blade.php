@@ -18,16 +18,10 @@
 
     <!-- Main content -->
     <section class="content">
-    {{Form::open([
-    
-    'route' => 'posts.store',
-    'files' => true
-    ])}}
       <!-- Default box -->
       <div class="box">
             <div class="box-header">
               <h3 class="box-title">Листинг сущности</h3>
-              @include('admin.errors')
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -68,7 +62,6 @@
             <!-- /.box-body -->
           </div>
       <!-- /.box -->
-      {{ Form::close() }}
     </section>
     <!-- /.content -->
   </div>

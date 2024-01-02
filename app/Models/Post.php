@@ -17,7 +17,7 @@ class Post extends Model
     const IS_DRAFT = 0;
     const IS_PUBLIC = 1;
 
-    protected $fillable = ['title', 'content', 'date'];
+    protected $fillable = ['title', 'content', 'date', 'description'];
 
     public function category()
     {
@@ -111,6 +111,16 @@ class Post extends Model
         $this->save();
     }
 
+    public function getCategoryID()
+    {
+        return $this->category != null ? $this->category->id : null;
+    }
+
+    public function formatDate()
+    {
+        return Carbon::createFromFormat('d/m/y', $this->date)->format('F d, Y');
+    }
+
     public function setTags($ids)
     {
         if($ids == null) { return; }
@@ -184,11 +194,8 @@ class Post extends Model
 
     public function getTagsTitles()
     {
-        if(!$this->tags->isEmpty())
-        {
-           return implode(', ', $this->pluck('title')->all()); 
-        }
-
-        return 'No tags';
+        return (!$this->tags->isEmpty())
+            ?   implode(', ', $this->tags->pluck('title')->all())
+            : 'Нет тегов';
     }
 }
