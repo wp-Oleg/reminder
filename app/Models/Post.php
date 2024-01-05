@@ -198,4 +198,36 @@ class Post extends Model
             ?   implode(', ', $this->tags->pluck('title')->all())
             : 'Нет тегов';
     }
+
+    public function hasPrevious()
+    {
+        self::where('id', '<', $this->id)->max('id');
+    }
+
+    public function getPrevious()
+    {
+        $postID = $this->hasPrevious();
+        return self::find($postID);
+    }
+
+    public function hasNext()
+    {
+        self::where('id', '>', $this->id)->min('id');
+    }
+
+    public function getNext()
+    {
+        $postID = $this->hasNext();
+        return self::find($postID);
+    }
+
+    public function related()
+    {
+        return self::all()->except($this->id);
+    }
+
+    public function hasCategory()
+    {
+        return $this->category != null ? true : false;
+    }
 }

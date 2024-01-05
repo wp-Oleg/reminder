@@ -1,5 +1,6 @@
 <?php
 
+//use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoriesController;
@@ -24,3 +25,6 @@ Route::resource('admin/categories', CategoriesController::class);
 Route::resource('admin/tags', TagsController::class);
 Route::resource('admin/users', UsersController::class);
 Route::resource('admin/posts', PostsController::class);
+Route::get('/post/{slug}', 'App\Http\Controllers\HomeController@show')->name('post.show');
+Route::get('/tag/{slug}', 'App\Http\Controllers\HomeController@tag')->name('tag.show');
+Route::get('/category/{slug}', 'App\Http\Controllers\HomeController@category')->name('category.show');
