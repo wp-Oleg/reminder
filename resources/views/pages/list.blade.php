@@ -31,8 +31,7 @@
                                     <h1 class="entry-title">
                                         <a href="{{route('post.show', $post->slug)}}">{{$post->title}}</a>
                                     </h1>
-
-
+                                    
                                 </header>
                                 <div class="entry-content">
                                     <p>
