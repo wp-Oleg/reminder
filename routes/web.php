@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\UsersController;
+//use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,14 +21,29 @@ use App\Http\Controllers\Admin\UsersController;
 
 Route::get('/', 'App\Http\Controllers\HomeController@index');
 
-Route::get('/admin', [DashboardController::class, 'index']);
-Route::resource('admin/categories', CategoriesController::class);
-Route::resource('admin/tags', TagsController::class);
-Route::resource('admin/users', UsersController::class);
-Route::resource('admin/posts', PostsController::class);
+Route::group(['prefix' => 'admin', 'namespase' => 'Admin', 'middleware' => 'admin'], function(){
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::resource('/categories', CategoriesController::class);
+    Route::resource('/tags', TagsController::class);
+    Route::resource('/users', UsersController::class);
+    Route::resource('/posts', PostsController::class);
+});
+
+
 Route::get('/post/{slug}', 'App\Http\Controllers\HomeController@show')->name('post.show');
 Route::get('/tag/{slug}', 'App\Http\Controllers\HomeController@tag')->name('tag.show');
 Route::get('/category/{slug}', 'App\Http\Controllers\HomeController@category')->name('category.show');
-Route::get('/register', 'App\Http\Controllers\AuthController@registerForm');
-Route::post('/register', 'App\Http\Controllers\AuthController@register');
-Route::get('/login', 'App\Http\Controllers\AuthController@loginForm');
+
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/profile', 'App\Http\Controllers\ProfileController@index');
+    Route::post('/profile', 'App\Http\Controllers\ProfileController@store');
+    Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
+});
+
+Route::group(['middleware' => 'guest'], function(){
+    Route::get('/register', 'App\Http\Controllers\AuthController@registerForm');
+    Route::post('/register', 'App\Http\Controllers\AuthController@register');
+    Route::get('/login', 'App\Http\Controllers\AuthController@loginForm')->name('login');
+    Route::post('/login', 'App\Http\Controllers\AuthController@login');
+});

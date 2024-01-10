@@ -32,7 +32,7 @@
 
                         <div class="social-share">
 							<span
-                                    class="social-share-title pull-left text-capitalize">By Rubel On February 12, 2016</span>
+                                    class="social-share-title pull-left text-capitalize">By {{$post->author->name}} On February 12, 2016</span>
                             <ul class="text-center pull-right">
                                 <li><a class="s-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li><a class="s-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
@@ -128,7 +128,7 @@
                 </div>
                 <!-- end bottom comment-->
 
-
+                @if(Auth::check())
                 <div class="leave-comment"><!--leave comment-->
                     <h4>Leave a reply</h4>
 
@@ -159,6 +159,7 @@
                         <a href="#" class="btn send-btn">Post Comment</a>
                     </form>
                 </div><!--end leave comment-->
+                @endif
             </div>
             @include('pages._sidebar')
         </div>
