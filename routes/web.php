@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin', 'namespase' => 'Admin', 'middleware' => 'admi
     Route::get('/comments', 'App\Http\Controllers\Admin\CommentsController@index');
     Route::get('/comments/toggle/{id}', 'App\Http\Controllers\Admin\CommentsController@toggle');
     Route::delete('/comments{id}/destroy', 'App\Http\Controllers\Admin\CommentsController@destroy')->name('comments.destroy');
+    Route::resource('/subscribers', 'App\Http\Controllers\Admin\SubscribersController');
 });
 
 
